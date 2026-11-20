@@ -8,19 +8,23 @@ const btnConverter = document.getElementById("btn-converter");
 btnConverter.addEventListener("click", () => {
     
     // Obtiene el valor del campo y lo transforma a double
-    const tempC = parseFloat(document.getElementById("temp-celcius").value);
+    const inputTempC = document.getElementById("temp-celcius");
+    const tempC = parseFloat(inputTempC.value);
 
 
     if (isNaN(tempC)) {
+
         content = `
-            <div class="result">
-            <h2>
-                Ingresa una temperatura en grados Celcius
-            </h2>
-        </div>
+            <div class="result-error">
+                <h2>
+                    Ingresa una temperatura en grados Celcius
+                </h2>
+            </div>
         `;
 
         containerResult.innerHTML = content;
+
+        inputTempC.value = "";
 
         return;
     } else { 
@@ -33,23 +37,22 @@ btnConverter.addEventListener("click", () => {
 
         // Crea el contenido
         const content = `
-            <div class="result">
+            <div class="result-success">
                 <h2>
-                    Temperatuta en grados Fahrenheit:
+                    La temperatura de ${tempC}° C equivalen a:
                 </h2>
                 <h3>
-                    ${tempF.toFixed(2)} F°
+                    ${tempF.toFixed(2)}° Fahrenheit
                 </h3>
-                <h2>
-                    Temperatuta en grados Kelvil:
-                </h2>
                 <h3>
-                    ${tempK.toFixed(2)} K°
+                    ${tempK.toFixed(2)}° Kelvin
                 </h3>
             </div>
         `;
 
         // Muestra el resultado dentro del contenedor de resultado
-        containerResult.innerHTML = content;   
+        containerResult.innerHTML = content;
+
+        inputTempC.value = "";
     }
 });
